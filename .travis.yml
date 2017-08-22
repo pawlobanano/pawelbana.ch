@@ -6,12 +6,13 @@ branches:
 
 script:
   - if [ ${TRAVIS_PULL_REQUEST} = "true" ]; then
-      [ $(wget -O /dev/null https://staging.pawelbana.ch 2>&1 | grep -f HTTP | cut -d " " -f 6) == 200 ] || travis_terminate 1
+      echo 'It is a pull request';
+      # [ $(wget -O /dev/null https://staging.pawelbana.ch 2>&1 | grep -f HTTP | cut -d ' ' -f 6) == 200 ] || travis_terminate 1;
     else
-      npm install -g firebase-tools
-      then rm -rf public/*
-      wget -r -np -nH -P public/ https://ch-pawelbana-staging.firebaseapp.com || travis_terminate 1
-      firebase deploy -P PROD --token $FIREBASE_TOKEN || travis_terminate 1
+      npm install -g firebase-tools;
+      then rm -rf public/*;
+      wget -r -np -nH -P public/ https://ch-pawelbana-staging.firebaseapp.com || travis_terminate 1;
+      firebase deploy -P PROD --token $FIREBASE_TOKEN || travis_terminate 1;
     fi
 
 env:
