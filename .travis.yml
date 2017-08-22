@@ -1,0 +1,20 @@
+language: go
+go: 1.8.x
+
+dist: trusty
+
+branches:
+  only: STAGING
+
+install:
+  - curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep browser_download_url | grep Linux-64bit.tar.gz | cut -d '"' -f 4 | wget -qi -
+  - sudo tar -zxf $(ls *Linux-64bit.tar.gz) -C /usr/local/bin hugo
+  - npm install -g firebase-tools
+
+before_script: rm -rf public/*
+
+script: hugo && firebase deploy -P STAGING --token $FIREBASE_TOKEN
+
+env:
+  global:
+    secure: DDPTJgf/S55ZZp+JhmR7fKoeGFm+5MaUl6om1RH8P4QMx2+jTKWm7KsYGZScJ5p02pKdanO+MpGxhKvLxkc4DvBq/TGAglXhQsU5GP6NAb0+oowMiBBYTR2k+Q3UQJUeOTqHZG043bAlXzdhkMW9fy0Et7HIf1woE+WudFxHNL8=
