@@ -6,7 +6,7 @@ branches:
   only: PROD
 
 script:
-  - if [ $TRAVIS_EVENT_TYPE != "pull_request" ]; then
+  - if [ $TRAVIS_EVENT_TYPE = "pull_request" ]; then
       $([ $(wget -O /dev/null https://staging.pawelbana.ch 2>&1 | grep -F HTTP | cut -d ' ' -f 6) = 200 ]) || travis_terminate 1;
     else
       npm install -g firebase-tools || travis_terminate 1;
