@@ -1,2 +1,5 @@
-### Hugo ###
+# Hugo
 /public/*
+
+# Other
+!.keep
