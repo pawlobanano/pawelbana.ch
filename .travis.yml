@@ -6,6 +6,9 @@ branches:
 
 script:
   - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+      wget -O /dev/null https://staging.pawelbana.ch 2>&1 | grep -f HTTP | cut -d ' ' -f 6;
+      $([ $(wget -O /dev/null https://staging.pawelbana.ch 2>&1 | grep -f HTTP | cut -d ' ' -f 6) == 200 ]) || travis_terminate 1;
+    else
       npm install -g firebase-tools;
       rm -rf public/*;
       wget -r -np -nH -P public/ https://ch-pawelbana-staging.firebaseapp.com || travis_terminate 1;
