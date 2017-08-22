@@ -5,8 +5,8 @@ branches:
   only: PROD
 
 script:
-  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-      $([ $(wget -O /dev/null https://staging.pawelbana.ch 2>&1 | grep -F HTTP | cut -d ' ' -f 6) == 200 ]) || travis_terminate 1;
+  - if [ $TRAVIS_PULL_REQUEST = true ]; then
+      $([ $(wget -O /dev/null https://staging.pawelbana.ch 2>&1 | grep -F HTTP | cut -d ' ' -f 6) = 200 ]) || travis_terminate 1;
     else
       npm install -g firebase-tools || travis_terminate 1;
       rm -rf public/* || travis_terminate 1;
