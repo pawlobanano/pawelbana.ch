@@ -7,13 +7,13 @@ branches:
   only: STAGING
 
 install:
-  - curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep browser_download_url | grep Linux-64bit.tar.gz | cut -d '"' -f 4 | wget -qi -
-  - sudo tar -zxf $(ls *Linux-64bit.tar.gz) -C /usr/local/bin hugo
   - npm install -g firebase-tools
 
-before_script: rm -rf public/*
+before_script:
+  - rm -rf public/*
+  - wget -r -np -nH -P public/ https://ch-pawelbana-staging.firebaseapp.com
 
-script: hugo && firebase deploy -P STAGING --token $FIREBASE_TOKEN
+script: firebase deploy -P PROD --token $FIREBASE_TOKEN
 
 env:
   global:
