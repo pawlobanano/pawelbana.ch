@@ -7,11 +7,9 @@ branches:
 install:
   - npm install -g firebase-tools
 
-before_script:
-  - rm -rf public/*
-  - wget -r -np -nH -P public/ https://ch-pawelbana-staging.firebaseapp.com
-
-script: firebase deploy -P PROD --token $FIREBASE_TOKEN
+script:
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then [ $(wget -O /dev/null https://pawelbana.ch 2>&1 | grep -f HTTP | cut -d " " -f 6) == 201 ]; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then rm -rf public/* && wget -r -np -nH -P public/ https://ch-pawelbana-staging.firebaseapp.com && firebase deploy -P PROD --token $FIREBASE_TOKEN; fi'
 
 env:
   global:
