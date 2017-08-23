@@ -1,7 +1,6 @@
+---
 language: go
-go: 1.8.x
-
-dist: trusty
+go: master
 
 branches:
   only: STAGING
@@ -11,9 +10,7 @@ install:
   - sudo tar -zxf $(ls *Linux-64bit.tar.gz) -C /usr/local/bin hugo
   - npm install -g firebase-tools
 
-before_script: rm -rf public/*
-
-script: hugo && firebase deploy -P STAGING --token $FIREBASE_TOKEN
+script: rm -rf public/* && hugo && firebase deploy -P STAGING --token $FIREBASE_TOKEN
 
 env:
   global:
