@@ -1,6 +1,5 @@
 {
   "projects": {
-    "PROD": "ch-pawelbana-prod",
     "STAGING": "ch-pawelbana-staging"
   }
 }
