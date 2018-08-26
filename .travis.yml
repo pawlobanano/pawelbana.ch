@@ -1,6 +1,9 @@
 ---
 language: go
-go: master
+go: stable
+
+git:
+  depth: false
 
 branches:
   only: STAGING
