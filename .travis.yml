@@ -6,12 +6,12 @@ branches:
   only: STAGING
 
 install:
-  - curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep browser_download_url | grep hugo | grep -v hugo_extended | grep Linux-64bit.tar.gz | cut -d '"' -f 4 | wget -qi -
-  - sudo tar -zxf $(ls *Linux-64bit.tar.gz) -C /usr/local/bin hugo
-  - npm install -g firebase-tools
+- curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep browser_download_url | grep hugo | grep -v hugo_extended | grep Linux-64bit.tar.gz | cut -d '"' -f 4 | wget -qi -
+- sudo tar -zxf $(ls *Linux-64bit.tar.gz) -C /usr/local/bin hugo
+- npm install -g firebase-tools
 
 script: rm -rf public/* && hugo && firebase deploy -P STAGING --token $FIREBASE_TOKEN
 
 env:
   global:
-    secure: ivdvRHZw4SaOyiEpOFFo7JKSNGjuIbFhM4NIqoxq2kRqjz6d52AxXF4CP+QOcDdW6bUXK18YLDUJ8A/JZnV7ZAVV1mIfCQEZU2Ts9BMqXwO0Wf+8QIaQPTB+USSdtQtAOsFGMLAe9H14k2PDFeo0IhNAAAyPHYcloytmaVgR5PM2tpBbm7Rm+dxyVAlB4FsjSC2L8l1uDbp/h5yVxYK6VuQrN0AfOw5bqfD7O/Uj6AfnE7+QHnFe7JlrCXWbNo4o6aqaSw/tfU9wVAkeKRn1PrkqWKFJX12KwInGRdBkPt1BG7e+cC+Wos1aZm8gatSErUG0GPEB1LMn4QDd4woT147fbhECkcCbI7JOSg2WJ7+3lvti0OdSKeMVaeAxL5sccZOveR1HopoYYcZrzmHSOVNjppTowikYq3KhgEUddXCcITCTNJt4/UHOSpNtvew/fdGc70mnXBkYXhiMR8ImC5nlMWlt8UUVxfmiDDGGGaF5iVQyNfZqiBkAKQ0d1JP8ArK0VEk9UMQe3V5rf+x0KsztcwO6H79miDJuuL7C7VoCtGHwRMtWuQae6qDkckPCyFKEIihPh8+djtUUZ/hqAeoyq/FcJF8zynW3/jw3SY8T99IvCHMe2zvMtr8BJn0UOd2qwQcvM6fnLORNK5QpIVbs8E1cGm0SGijdoi5RcaU=
+  - secure: j4CfBlB+T0VwOiBMyPF+It09FV/4uLwuxQFWsrwAoF/qQo5VsjidYiOTdG7iEiIJMWUZhBZ4nhb9P9yfp1rNi4k9RFWsHKHCmxfDqnTOD07mZOB5tegUsykDmUxoJragRMQ6rRRu5Uy1foTkxi9DkXbNEW1B6v7UCh44CMnViTKwncx5mOT7shIHBzbENcj2KDcZf1W3IlLBtDr4mOoN25X5hKBudMF8iFCI/BfZbWePalh5J2cCsup2Y+tNO6vLU0XmEY84XCLUuPAVvTmqIq9z6BHvo+ahcfGIz4F7bqB2QOhJytYYsigHSz3mH1VMyd0DmoqI+2z280Qsc3nHd81GJaeeJf1ze91Pd38roPnDbtWfxrLB7dSKb+MWsnktZbp3BzX7UJWE97IF6Iu1STxzmMUk1e1L36cPWvO3nJG8vOByeN2YMYRguRypuPz6B26/fi4Aq9Ip0v7Bvry1oESzewEYLG8tzFOVeaAfSby3F5fjy/WGSsUpvrwMYUAfvmp7H0UsneUnct/ZCq9uhKReGXBWO1qKJh3ZXcAIzkuekknGQ4VPWhgnf7Us/EYlun6vaAGvYXW+hCIPsyLEWcGo4e7iZndniemWlp4hR28MTpS79WT92V+xe1ATg4+kphl8wo/doW2Wg2LOuxxjupgvl94Jz53SDosfRe+bsWs=
