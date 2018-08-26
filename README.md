@@ -2,5 +2,5 @@
 
 Source code of https://pawelbana.ch
 
-# Powered by DevOps automation
+# CI/CD automation
 ![Automation flow graph](automation-flow-graph-release-on-pawelbana-ch.png "Release on www.pawelbana.ch")
