@@ -1,19 +1,22 @@
 ---
-language: go
-go: stable
+language: node_js
+node_js: lts/*
 
 git:
   depth: false
 
 branches:
-  only: STAGING
+  only: PROD
 
-install:
-- curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep browser_download_url | grep hugo | grep -v hugo_extended | grep Linux-64bit.tar.gz | cut -d '"' -f 4 | wget -qi -
-- sudo tar -zxf $(ls *Linux-64bit.tar.gz) -C /usr/local/bin hugo
-- npm install -g firebase-tools
-
-script: rm -rf public/* && hugo && firebase deploy -P STAGING --token $FIREBASE_TOKEN
+script:
+  - if [ $TRAVIS_EVENT_TYPE = "pull_request" ]; then
+      $([ $(wget -O /dev/null https://staging.pawelbana.ch 2>&1 | grep -F HTTP | cut -d ' ' -f 6) = 200 ]) || travis_terminate 1;
+    else
+      npm install -g firebase-tools || travis_terminate 1;
+      rm -rf public/* || travis_terminate 1;
+      wget -r -np -nH -P public/ https://ch-pawelbana-staging.firebaseapp.com || travis_terminate 1;
+      firebase deploy -P PROD --token $FIREBASE_TOKEN || travis_terminate 1;
+    fi
 
 env:
   global:
