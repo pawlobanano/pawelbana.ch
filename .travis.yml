@@ -14,7 +14,7 @@ install:
 - curl https://firebase.tools/bin/linux/latest --output firebase
 - chmod +x firebase
 
-script: rm -rf public/* && hugo && firebase deploy -P STAGING --token $FIREBASE_TOKEN
+script: rm -rf public/* && hugo && ./firebase deploy -P STAGING --token $FIREBASE_TOKEN
 
 env:
   global:
