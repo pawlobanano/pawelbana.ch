@@ -11,10 +11,9 @@ branches:
 install:
 - curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep browser_download_url | grep hugo | grep -v hugo_extended | grep Linux-64bit.tar.gz | cut -d '"' -f 4 | wget -qi -
 - sudo tar -zxf $(ls *Linux-64bit.tar.gz) -C /usr/local/bin hugo
-- curl https://firebase.tools/bin/linux/latest --output firebase
-- chmod +x ./firebase
+- curl -sL firebase.tools | analytics=false bash
 
-script: ./firebase -V && rm -rf public/* && hugo && ./firebase deploy -P STAGING --token $FIREBASE_TOKEN
+script: rm -rf public/* && hugo && firebase deploy -P STAGING --token $FIREBASE_TOKEN
 
 env:
   global:
