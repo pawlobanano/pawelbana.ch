@@ -19,5 +19,6 @@ jobs:
         checksumFile=$(ls -t *_checksums.txt | head -1)
         grep $(sha256sum $hugoGzip | awk '{print $1}') $checksumFile
         sudo tar -zxf $hugoGzip -C /usr/local/bin hugo
+      
+    - name: Install firebase
         npm install -g firebase-tools
-      shell: bash
