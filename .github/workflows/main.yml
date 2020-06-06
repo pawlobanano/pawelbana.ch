@@ -1,4 +1,10 @@
-name: CI
+name: CI of pawelbana.ch webpage
+
+env:
+  STAGING: STAGING
+  first: GITHUB_REF
+  second: GITHUB_HEAD_REF
+  third: GITHUB_BASE_REF
 
 on:
   push:
@@ -11,23 +17,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Clone code repository
-      run: git clone --depth=1 https://github.com/pawlobanano/pawelbana.ch/tree/STAGING .
-    
-    - name: Download Hugo
-      run: |
-        curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep browser_download_url | grep hugo | grep -v hugo_extended | grep Linux-64bit.tar.gz | cut -d '"' -f 4 | wget -qi -
-        curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep browser_download_url | grep hugo | grep _checksums.txt | cut -d '"' -f 4 | wget -qi -
-        hugoGzip=$(ls -t *Linux-64bit.tar.gz | head -1)
-        checksumFile=$(ls -t *_checksums.txt | head -1)
-        grep $(sha256sum $hugoGzip | awk '{print $1}') $checksumFile
-        sudo tar -zxf $hugoGzip -C /usr/local/bin hugo
-    
-    - name: Download Firebase
-      run: curl -Lo ./firebase_bin https://firebase.tools/bin/linux/latest && chmod u+x firebase_bin
-    
-    - name: Compile Hugo
-      run: pwd && cd .. && pwd && ls -la && rm -rf public/* && pwd && ls -al && hugo
-      
-    - name: Deploy to Firebase
-      run: ./firebase_bin deploy -P STAGING --token $FIREBASE_TOKEN
+      - name: Github repo name options
+        run: |
+          echo ${{ env.first }}
+          echo ${{ env.second }}
+          echo ${{ env.third }}
+          
+      - name: Clone code repository
+        run: | 
+          git clone --depth=1 https://github.com/$GITHUB_REPOSITORY .
+          git checkout $GITHUB_SHA
+
+
+      - name: Download Hugo
+        run: |
+          curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep browser_download_url | grep hugo | grep -v hugo_extended | grep Linux-64bit.tar.gz | cut -d '"' -f 4 | wget -qi -
+          curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep browser_download_url | grep hugo | grep _checksums.txt | cut -d '"' -f 4 | wget -qi -
+          hugoGzip=$(ls -t *Linux-64bit.tar.gz | head -1)
+          checksumFile=$(ls -t *_checksums.txt | head -1)
+          grep $(sha256sum $hugoGzip | awk '{print $1}') $checksumFile
+          sudo tar -zxf $hugoGzip -C /usr/local/bin hugo
+
+      - name: Download Firebase
+        run: |
+          curl -Lo ./firebase_bin https://firebase.tools/bin/linux/latest
+          chmod u+x firebase_bin
+
+      - name: Compile Hugo
+        run: | 
+          rm -rf public/*
+          hugo
+
+      - name: Deploy to Firebase
+        run: ./firebase_bin deploy -P STAGING --token $FIREBASE_TOKEN
