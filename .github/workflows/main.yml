@@ -1,14 +1,13 @@
-name: CI of pawelbana.ch webpage
+name: CI of the https://staging.pawelbana.ch
 
 env:
-  WORKING_BRANCH: STAGING
-  FIREBASE_TOKEN: ${{ secrets.SuperSecret }}
+  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
 on:
   push:
-    branches: [ ${{ env.WORKING_BRANCH }} ]
+    branches: [ STAGING ]
   pull_request:
-    branches: [ ${{ env.WORKING_BRANCH }} ]
+    branches: [ STAGING ]
 
 jobs:
   build:
@@ -17,9 +16,8 @@ jobs:
     steps:
       - name: Clone code repository
         run: | 
-          git clone --depth=1 https://github.com/$GITHUB_REPOSITORY .
-          git checkout $GITHUB_SHA
-
+          git clone --depth=1 https://github.com/${{ github.repository }} .
+          git checkout ${{ github.sha }}
 
       - name: Download Hugo
         run: |
