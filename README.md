@@ -1,4 +1,4 @@
-# www.pawelbana.ch [![Build Status](https://travis-ci.org/pawlobanano/pawelbana.ch.svg?branch=PROD)](https://travis-ci.org/pawlobanano/pawelbana.ch)
+![CI of the prod.pawelbana.ch](https://github.com/pawlobanano/pawelbana.ch/workflows/CI%20of%20the%20prod.pawelbana.ch/badge.svg?branch=PROD)
 
 Source code of https://pawelbana.ch
 
