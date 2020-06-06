@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Clone code repository
         run: | 
-          git clone --depth=1 https://github.com/${{ github.repository }} .
+          git clone https://github.com/${{ github.repository }} .
           git checkout ${{ github.sha }}
       
       - name: Check HTTP status code 200 on staging.pawelbana.ch
