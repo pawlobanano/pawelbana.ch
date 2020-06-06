@@ -1,28 +1,20 @@
 name: CI of pawelbana.ch webpage
 
 env:
-  STAGING: STAGING
-  first: ${{ github.ref }}
-  second: ${{ github.head_ref }}
-  third: ${{ github.base_ref }}	
+  WORKING_BRANCH: STAGING
+  FIREBASE_TOKEN: ${{ secrets.SuperSecret }}
 
 on:
   push:
-    branches: [ STAGING ]
+    branches: [ ${{ env.WORKING_BRANCH }} ]
   pull_request:
-    branches: [ STAGING ]
+    branches: [ ${{ env.WORKING_BRANCH }} ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Github repo name options
-        run: |
-          echo ${{ env.first }}
-          echo ${{ env.second }}
-          echo ${{ env.third }}
-          
       - name: Clone code repository
         run: | 
           git clone --depth=1 https://github.com/$GITHUB_REPOSITORY .
