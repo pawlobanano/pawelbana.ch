@@ -3,8 +3,8 @@ name: CI of pawelbana.ch webpage
 env:
   STAGING: STAGING
   first: ${{ github.ref }}
-  second: $GITHUB_HEAD_REF
-  third: $GITHUB_BASE_REF
+  second: ${{ github.head_ref }}
+  third: ${{ github.base_ref }}	
 
 on:
   push:
