@@ -19,13 +19,18 @@ jobs:
           git clone https://github.com/${{ github.repository }} .
           git checkout ${{ github.sha }}
       
-      - name: Check HTTP status code 200 on staging.pawelbana.ch
+      - name: Check staging.pawelbana.ch for HTTP status code 200
         run: $([ $(wget -O /dev/null https://staging.pawelbana.ch 2>&1 | grep -F HTTP | cut -d ' ' -f 6) = 200 ]) || exit 1;
 
       - name: Download content of public directory from staging.pawelbana.ch
         run: |
           rm -rf public/*
           wget -r -np -nH -P public/ https://ch-pawelbana-staging.firebaseapp.com;
+
+      - name: Download Firebase
+        run: |
+          curl -Lo ./firebase_bin https://firebase.tools/bin/linux/latest
+          chmod u+x firebase_bin
 
       - name: Deploy to Firebase
         run: ./firebase_bin deploy -P PROD --token $FIREBASE_TOKEN
