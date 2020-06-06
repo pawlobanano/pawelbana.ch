@@ -1,0 +1,31 @@
+name: CI of the prod.pawelbana.ch
+
+env:
+  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+on:
+  push:
+    branches: [ PROD ]
+  pull_request:
+    branches: [ PROD ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone code repository
+        run: | 
+          git clone --depth=1 https://github.com/${{ github.repository }} .
+          git checkout ${{ github.sha }}
+      
+      - name: Check HTTP status code 200 on staging.pawelbana.ch
+        run: $([ $(wget -O /dev/null https://staging.pawelbana.ch 2>&1 | grep -F HTTP | cut -d ' ' -f 6) = 200 ]) || exit 1;
+
+      - name: Download content of public directory from staging.pawelbana.ch
+        run: |
+          rm -rf public/*
+          wget -r -np -nH -P public/ https://ch-pawelbana-staging.firebaseapp.com;
+
+      - name: Deploy to Firebase
+        run: ./firebase_bin deploy -P PROD --token $FIREBASE_TOKEN
