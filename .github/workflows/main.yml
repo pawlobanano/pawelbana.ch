@@ -24,7 +24,7 @@ jobs:
       run: curl -Lo ./firebase_bin https://firebase.tools/bin/linux/latest && chmod u+x firebase_bin
     
     - name: Compile Hugo
-      run: rm -rf public/* && hugo
+      run: rm -rf public/* && pwd && hugo
       
     - name: Deploy to Firebase
       run: ./firebase_bin deploy -P STAGING --token $FIREBASE_TOKEN
