@@ -2,9 +2,9 @@ name: CI of pawelbana.ch webpage
 
 env:
   STAGING: STAGING
-  first: GITHUB_REF
-  second: GITHUB_HEAD_REF
-  third: GITHUB_BASE_REF
+  first: $GITHUB_REF
+  second: $GITHUB_HEAD_REF
+  third: $GITHUB_BASE_REF
 
 on:
   push:
