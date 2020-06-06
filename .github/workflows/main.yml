@@ -1,4 +1,4 @@
-name: CI of the https://staging.pawelbana.ch
+name: CI of the staging.pawelbana.ch
 
 env:
   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
