@@ -18,9 +18,7 @@ jobs:
         hugoGzip=$(ls -t *Linux-64bit.tar.gz | head -1)
         checksumFile=$(ls -t *_checksums.txt | head -1)
         grep $(sha256sum $hugoGzip | awk '{print $1}') $checksumFile
-        
-    - name: Install Hugo
-      run: sudo tar -zxf $hugoGzip -C /usr/local/bin hugo
+        sudo tar -zxf $hugoGzip -C /usr/local/bin hugo
     
     - name: Download Firebase
       run: curl -Lo ./firebase_bin https://firebase.tools/bin/linux/latest && chmod u+x firebase_bin
