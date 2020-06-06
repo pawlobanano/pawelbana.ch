@@ -2,7 +2,7 @@ name: CI of pawelbana.ch webpage
 
 env:
   STAGING: STAGING
-  first: $GITHUB_REF
+  first: ${{ github.ref }}
   second: $GITHUB_HEAD_REF
   third: $GITHUB_BASE_REF
 
