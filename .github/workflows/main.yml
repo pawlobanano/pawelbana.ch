@@ -25,7 +25,7 @@ jobs:
       - name: Download content of public directory from staging.pawelbana.ch
         run: |
           rm -rf public/*
-          wget -r -np -nH -P public/ https://ch-pawelbana-staging.firebaseapp.com;
+          wget -r -np -nH -P public/ https://ch-pawelbana-staging-eur3.firebaseapp.com;
 
       - name: Download Firebase
         run: |
