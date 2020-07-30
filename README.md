@@ -3,4 +3,4 @@
 Source code of https://staging.pawelbana.ch
 
 # CI/CD automation
-![Automation flow graph](personal-website-ci-staging.svg "Continous -Integration, -Delivery, -Deployment on www.staging.pawelbana.ch")
+![Automation flow graph](personal-website-ci-staging.png "Continous -Integration, -Delivery, -Deployment on www.staging.pawelbana.ch")
