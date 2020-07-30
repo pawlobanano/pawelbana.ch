@@ -1,13 +1,13 @@
-name: CI of the prod.pawelbana.ch
+name: CI of the prod branch
 
 env:
   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
 on:
   push:
-    branches: [ PROD ]
+    branches: [ prod ]
   pull_request:
-    branches: [ PROD ]
+    branches: [ prod ]
 
 jobs:
   build:
@@ -33,4 +33,4 @@ jobs:
           chmod u+x firebase_bin
 
       - name: Deploy to Firebase
-        run: ./firebase_bin deploy -P PROD --token $FIREBASE_TOKEN
+        run: ./firebase_bin deploy -P prod --token $FIREBASE_TOKEN

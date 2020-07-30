@@ -1,5 +1,5 @@
 {
   "projects": {
-    "PROD": "ch-pawelbana-prod-eur3"
+    "prod": "ch-pawelbana-prod-eur3"
   }
 }

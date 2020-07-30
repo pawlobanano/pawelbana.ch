@@ -1,4 +1,4 @@
-![CI of the prod.pawelbana.ch](https://github.com/pawlobanano/pawelbana.ch/workflows/CI%20of%20the%20prod.pawelbana.ch/badge.svg?branch=PROD)
+![CI of the prod.pawelbana.ch](https://github.com/pawlobanano/pawelbana.ch/workflows/CI%20of%20the%20prod.pawelbana.ch/badge.svg?branch=prod)
 
 Source code of https://pawelbana.ch
 
