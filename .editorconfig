@@ -1,6 +1,3 @@
-# Editor configuration, see http://editorconfig.org
-
-# special property that should be specified at the top of the file outside of any sections. Set to true to stop .editorconfig files search on current file.
 root = true
 
 [*]
