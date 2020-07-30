@@ -33,7 +33,7 @@ jobs:
           curl -Lo ./firebase_bin https://firebase.tools/bin/linux/latest
           chmod u+x firebase_bin
 
-      - name: Compile Hugo
+      - name: Hugo builds your site
         run: | 
           rm -rf public/*
           hugo
