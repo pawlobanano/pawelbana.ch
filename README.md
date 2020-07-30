@@ -1,4 +1,4 @@
-![CI of the staging.pawelbana.ch](https://github.com/pawlobanano/pawelbana.ch/workflows/CI%20of%20the%20staging.pawelbana.ch/badge.svg?branch=STAGING)
+![CI of the staging.pawelbana.ch](https://github.com/pawlobanano/pawelbana.ch/workflows/CI%20of%20the%20staging.pawelbana.ch/badge.svg?branch=staging)
 
 Source code of https://staging.pawelbana.ch
 

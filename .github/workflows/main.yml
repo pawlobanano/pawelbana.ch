@@ -5,9 +5,9 @@ env:
 
 on:
   push:
-    branches: [ STAGING ]
+    branches: [ staging ]
   pull_request:
-    branches: [ STAGING ]
+    branches: [ staging ]
 
 jobs:
   build:
@@ -39,4 +39,4 @@ jobs:
           hugo
 
       - name: Deploy to Firebase
-        run: ./firebase_bin deploy --only hosting -P STAGING --token $FIREBASE_TOKEN
+        run: ./firebase_bin deploy --only hosting -P staging --token $FIREBASE_TOKEN

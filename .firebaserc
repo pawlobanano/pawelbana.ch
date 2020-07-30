@@ -1,5 +1,5 @@
 {
   "projects": {
-    "STAGING": "ch-pawelbana-staging-eur3"
+    "staging": "ch-pawelbana-staging-eur3"
   }
 }
