@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Clone code repository
         run: | 
-          git clone https://github.com/${{ github.repository }} .
+          git clone --depth=1 https://github.com/${{ github.repository }} .
           git checkout ${{ github.sha }}
       
       - name: Download Hugo
