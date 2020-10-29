@@ -16,21 +16,27 @@ jobs:
     steps:
       - name: Clone code repository
         run: | 
-          git clone https://github.com/${{ github.repository }} .
+          git clone --depth=1 https://github.com/${{ github.repository }} .
           git checkout ${{ github.sha }}
       
-      - name: Check staging.pawelbana.ch for HTTP status code 200
-        run: $([ $(wget -O /dev/null https://staging.pawelbana.ch 2>&1 | grep -F HTTP | cut -d ' ' -f 6) = 200 ]) || exit 1;
-
-      - name: Download content of public directory from staging.pawelbana.ch
+      - name: Download Hugo
         run: |
-          rm -rf public/*
-          wget -r -np -nH -P public/ https://ch-pawelbana-staging-eur3.firebaseapp.com;
-
+          curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep browser_download_url | grep hugo | grep -v hugo_extended | grep Linux-32bit.tar.gz | cut -d '"' -f 4 | wget -qi -
+          curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep browser_download_url | grep hugo | grep _checksums.txt | cut -d '"' -f 4 | wget -qi -
+          hugoGzip=$(ls -t *Linux-32bit.tar.gz | head -1)
+          checksumFile=$(ls -t *_checksums.txt | head -1)
+          grep $(sha256sum $hugoGzip | awk '{print $1}') $checksumFile
+          sudo tar -zxf $hugoGzip -C /usr/local/bin hugo
+  
       - name: Download Firebase
         run: |
           curl -Lo ./firebase_bin https://firebase.tools/bin/linux/latest
           chmod u+x firebase_bin
+          
+      - name: Build website with Hugo
+        run: | 
+          rm -rf public/*
+          hugo -e prod
 
       - name: Deploy to Firebase
-        run: ./firebase_bin deploy -P prod --token $FIREBASE_TOKEN
+        run: ./firebase_bin deploy --only hosting -P prod --token $FIREBASE_TOKEN
