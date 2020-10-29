@@ -33,10 +33,10 @@ jobs:
           curl -Lo ./firebase_bin https://firebase.tools/bin/linux/latest
           chmod u+x firebase_bin
 
-      - name: Hugo builds your site
+      - name: Build website with Hugo
         run: | 
           rm -rf public/*
-          hugo
+          hugo -e staging
 
       - name: Deploy to Firebase
         run: ./firebase_bin deploy --only hosting -P staging --token $FIREBASE_TOKEN
