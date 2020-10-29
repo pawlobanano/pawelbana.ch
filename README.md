@@ -3,4 +3,4 @@
 Source code of https://pawelbana.ch
 
 ## CI/CD automation
-![CI Automation flow graph](automation-flow-graph-release-on-pawelbana-ch.png "Deployment process on https://pawelbana.ch")
+![CI automation flow graph](personal-website-ci-prod.png "Continous -Integration, -Delivery, -Deployment on https://pawelbana.ch")
